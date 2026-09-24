@@ -1,0 +1,20 @@
+# Documentación interna y material de formación
+README.md
+AGENTS.md
+CLAUDE.md
+.github/
+.agents/
+.claude/
+skills-lock.json
+docs/
+
+# Tests y prototipos no usados por la app publicada
+test/
+mockup-mini-service-desk.html
+js/components/
+js/utils/
+
+# Recursos visuales no referenciados por index.html
+assets/dribble/
+assets/verisure/verisure-logo-1.svg
+assets/verisure/verisure-logo-2.svg

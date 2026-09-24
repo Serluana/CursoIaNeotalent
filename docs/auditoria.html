@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Auditoría previa a la publicación del Mini Service Desk en Surge.">
+  <title>Auditoría Surge · Mini Service Desk</title>
+  <style>
+    :root {
+      --ink: #172433;
+      --ink-soft: #526171;
+      --paper: #f4f7f8;
+      --surface: #ffffff;
+      --surface-blue: #eaf1f3;
+      --line: #d6e0e3;
+      --navy: #193247;
+      --navy-deep: #102638;
+      --signal: #e66a3d;
+      --signal-soft: #fff0e9;
+      --teal: #267c78;
+      --teal-soft: #e2f3f0;
+      --amber: #ac7215;
+      --amber-soft: #fff3d9;
+      --red: #bd3d43;
+      --red-soft: #fde8ea;
+      --radius: 10px;
+      --shadow: 0 16px 40px rgba(16, 38, 56, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: var(--teal); }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 3px solid #f4a261; outline-offset: 3px; }
+
+    .page {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+    .rail {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+      padding: 28px 22px;
+      color: #eff8f8;
+      background: var(--navy-deep);
+      border-right: 1px solid #2f495a;
+    }
+    .mark {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 42px;
+      font-size: .83rem;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+    .mark-icon {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      color: var(--navy-deep);
+      background: #f4a261;
+      border-radius: 50%;
+      font-weight: 900;
+    }
+    .rail-label {
+      margin: 0 0 10px;
+      color: #9ab1bd;
+      font-size: .69rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .nav {
+      display: grid;
+      gap: 6px;
+    }
+    .nav a {
+      display: block;
+      padding: 10px 12px;
+      color: #cfdee3;
+      border-left: 3px solid transparent;
+      text-decoration: none;
+      transition: background .18s ease, border-color .18s ease, color .18s ease;
+    }
+    .nav a:hover, .nav a.active {
+      color: white;
+      background: rgba(255,255,255,.08);
+      border-left-color: #f4a261;
+    }
+    .rail-note {
+      position: absolute;
+      right: 22px;
+      bottom: 28px;
+      left: 22px;
+      padding-top: 15px;
+      color: #9ab1bd;
+      border-top: 1px solid #2f495a;
+      font-size: .78rem;
+    }
+
+    .content { min-width: 0; }
+    .hero {
+      padding: 54px clamp(24px, 6vw, 92px) 42px;
+      color: #f7fbfb;
+      background: linear-gradient(125deg, var(--navy-deep), var(--navy) 68%, #27545c);
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      color: #f7bf93;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .hero-kicker::before {
+      width: 28px;
+      height: 2px;
+      background: #f4a261;
+      content: "";
+    }
+    h1, h2, h3 { line-height: 1.15; }
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.5rem, 5vw, 5.3rem);
+      font-weight: 500;
+      letter-spacing: -.045em;
+    }
+    .hero-lede {
+      max-width: 720px;
+      margin: 22px 0 0;
+      color: #c8d8dc;
+      font-size: 1.08rem;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px 24px;
+      margin-top: 30px;
+      color: #a8c1c7;
+      font-size: .86rem;
+    }
+    .hero-meta strong { color: #f6e3d4; }
+
+    main {
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 32px 0 76px;
+    }
+    .verdict {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: center;
+      margin-top: -62px;
+      padding: 22px 24px;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--signal);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .verdict h2 { margin: 0 0 5px; font-size: 1.2rem; }
+    .verdict p { margin: 0; color: var(--ink-soft); }
+    .verdict-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+    .button {
+      padding: 10px 14px;
+      color: var(--navy);
+      background: var(--surface-blue);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-weight: 700;
+    }
+    .button:hover { border-color: var(--teal); }
+    .button.primary { color: white; background: var(--teal); border-color: var(--teal); }
+
+    .section { scroll-margin-top: 22px; padding-top: 48px; }
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+    .section-heading h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 2rem; font-weight: 500; }
+    .section-heading p { max-width: 570px; margin: 0; color: var(--ink-soft); }
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--signal);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .risk-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .filters { display: flex; flex-wrap: wrap; gap: 7px; }
+    .filter {
+      padding: 7px 11px;
+      color: var(--ink-soft);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: .8rem;
+      font-weight: 700;
+    }
+    .filter[aria-pressed="true"] { color: white; background: var(--navy); border-color: var(--navy); }
+    .search {
+      width: min(300px, 100%);
+      padding: 9px 12px;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+    }
+    .risk-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 180px;
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--teal);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 18px rgba(16, 38, 56, .04);
+    }
+    .risk-card[data-level="alto"] { border-top-color: var(--red); }
+    .risk-card[data-level="medio"] { border-top-color: var(--amber); }
+    .risk-card[data-level="bajo"] { border-top-color: var(--teal); }
+    .risk-card h3 { margin: 10px 0 8px; font-size: 1rem; }
+    .risk-card p { margin: 0; color: var(--ink-soft); font-size: .9rem; }
+    .risk-card.is-hidden { display: none; }
+    .level {
+      align-self: flex-start;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: .69rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .level.alto { color: var(--red); background: var(--red-soft); }
+    .level.medio { color: var(--amber); background: var(--amber-soft); }
+    .level.bajo { color: var(--teal); background: var(--teal-soft); }
+
+    .panel {
+      padding: 22px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .panel + .panel { margin-top: 13px; }
+    .panel h3 { margin: 0 0 10px; font-size: 1.05rem; }
+    .panel p { color: var(--ink-soft); }
+    .panel p:last-child { margin-bottom: 0; }
+    .proof {
+      display: inline-block;
+      margin-right: 4px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      vertical-align: 2px;
+    }
+    .proof.checked { color: var(--teal); background: var(--teal-soft); }
+    .proof.interpreted { color: var(--amber); background: var(--amber-soft); }
+
+    .table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+    table { width: 100%; min-width: 680px; border-collapse: collapse; }
+    th, td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    th { color: var(--navy); background: var(--surface-blue); font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    td { color: var(--ink-soft); font-size: .9rem; }
+    td:first-child { width: 28%; color: var(--ink); font-weight: 700; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      counter-reset: flow;
+    }
+    .flow-step { position: relative; padding: 18px 14px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+    .flow-step::before { counter-increment: flow; content: counter(flow, decimal-leading-zero); color: var(--signal); font-size: .75rem; font-weight: 800; }
+    .flow-step p { margin: 10px 0 0; color: var(--ink-soft); font-size: .85rem; }
+
+    details { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+    details + details { margin-top: 9px; }
+    summary { padding: 15px 18px; color: var(--navy); cursor: pointer; font-weight: 800; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { float: right; color: var(--signal); content: "+"; font-size: 1.2rem; line-height: 1; }
+    details[open] summary::after { content: "-"; }
+    .details-body { padding: 0 18px 18px; border-top: 1px solid var(--line); }
+    .details-body p { color: var(--ink-soft); }
+    .details-body li { margin: 7px 0; color: var(--ink-soft); }
+
+    pre {
+      overflow-x: auto;
+      margin: 15px 0 0;
+      padding: 16px;
+      color: #dce9eb;
+      background: var(--navy-deep);
+      border-radius: 7px;
+      font: .82rem/1.55 Consolas, "Liberation Mono", monospace;
+    }
+    code { padding: 2px 5px; color: var(--navy); background: var(--surface-blue); border-radius: 3px; font-size: .9em; }
+    pre code { padding: 0; color: inherit; background: transparent; }
+    .action-row { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 15px; }
+    .callout { padding: 16px 18px; color: var(--navy); background: var(--signal-soft); border-left: 4px solid var(--signal); }
+    .callout p { margin: 0; }
+    .checklist { display: grid; gap: 8px; padding: 0; list-style: none; }
+    .checklist li { display: grid; grid-template-columns: 24px 1fr; gap: 9px; align-items: start; padding: 11px 0; color: var(--ink-soft); border-bottom: 1px solid var(--line); }
+    .checklist li::before { display: grid; place-items: center; width: 20px; height: 20px; color: var(--teal); border: 2px solid var(--teal); border-radius: 50%; content: ""; }
+    .empty { display: none; padding: 20px; color: var(--ink-soft); text-align: center; background: var(--surface); border: 1px dashed var(--line); }
+    footer { margin-top: 44px; padding-top: 22px; color: var(--ink-soft); border-top: 1px solid var(--line); font-size: .85rem; }
+
+    @media (max-width: 980px) {
+      .page { grid-template-columns: 1fr; }
+      .rail { position: static; height: auto; padding: 16px 22px; }
+      .mark { margin-bottom: 14px; }
+      .nav { display: flex; overflow-x: auto; gap: 5px; }
+      .nav a { white-space: nowrap; border-bottom: 3px solid transparent; border-left: 0; }
+      .nav a:hover, .nav a.active { border-bottom-color: #f4a261; border-left: 0; }
+      .rail-note { display: none; }
+      .flow { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 700px) {
+      .hero { padding: 38px 20px 34px; }
+      main { width: min(100% - 28px, 1180px); padding-top: 22px; }
+      .verdict { grid-template-columns: 1fr; margin-top: -26px; padding: 18px; }
+      .section { padding-top: 34px; }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 10px; }
+      .risk-grid { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: 1fr; }
+      .flow-step { min-height: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+    @media print {
+      .rail, .verdict-actions, .risk-toolbar, .action-row { display: none; }
+      .page { display: block; }
+      .hero { padding: 24px; color: #000; background: white; }
+      main { width: 100%; padding: 20px 0; }
+      .verdict { margin-top: 0; box-shadow: none; }
+      details { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <aside class="rail" aria-label="Navegación de la auditoría">
+      <div class="mark"><span class="mark-icon">◎</span><span>Control de publicación</span></div>
+      <p class="rail-label">En este informe</p>
+      <nav class="nav">
+        <a class="active" href="#resumen">Resumen</a>
+        <a href="#arquitectura">Arquitectura</a>
+        <a href="#seguridad">Seguridad</a>
+        <a href="#responsive">Responsive</a>
+        <a href="#despliegue">Despliegue</a>
+        <a href="#acciones">Arreglos rápidos</a>
+      </nav>
+      <p class="rail-note">24/09/2026<br>Revisión previa a Surge</p>
+    </aside>
+
+    <div class="content">
+      <header class="hero" id="resumen">
+        <div class="hero-kicker">Mini Service Desk · auditoría técnica</div>
+        <h1>Antes de publicar, sabemos qué estamos exponiendo.</h1>
+        <p class="hero-lede">Revisión del código real, sus rutas, sus datos y su comportamiento responsive. Las evidencias están separadas de las interpretaciones para que la decisión de publicación sea trazable.</p>
+        <div class="hero-meta">
+          <span><strong>Fecha</strong> 24/09/2026</span>
+          <span><strong>Alcance</strong> repositorio completo</span>
+          <span><strong>Estado</strong> no publicado</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="verdict" aria-labelledby="verdict-title">
+          <div>
+            <h2 id="verdict-title">Veredicto: corregir dos bloqueos antes de subir</h2>
+            <p>Hay un riesgo de inyección HTML en los tickets y un desbordamiento claro en tablet a 768 px. El paquete público también debe reducirse al mínimo ejecutable.</p>
+          </div>
+          <div class="verdict-actions">
+            <a class="button primary" href="auditoria.md">Leer Markdown</a>
+            <button class="button" id="print-button" type="button">Imprimir / PDF</button>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="risks-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">Decisión rápida</p><h2 id="risks-title">Hallazgos por severidad</h2></div>
+            <p>Filtra la lista para revisar primero los riesgos que bloquean la publicación. La búsqueda encuentra palabras dentro del título y la explicación.</p>
+          </div>
+          <div class="risk-toolbar">
+            <div class="filters" aria-label="Filtrar por severidad">
+              <button class="filter" type="button" data-filter="todos" aria-pressed="true">Todos</button>
+              <button class="filter" type="button" data-filter="alto" aria-pressed="false">Alto</button>
+              <button class="filter" type="button" data-filter="medio" aria-pressed="false">Medio</button>
+              <button class="filter" type="button" data-filter="bajo" aria-pressed="false">Bajo</button>
+            </div>
+            <input class="search" id="risk-search" type="search" placeholder="Buscar hallazgo..." aria-label="Buscar hallazgo">
+          </div>
+          <div class="risk-grid" id="risk-grid">
+            <article class="risk-card" data-level="alto" data-search="xss inyección html innerhtml tickets seguridad">
+              <span class="level alto">Alto</span>
+              <h3>XSS almacenado o inyección de HTML</h3>
+              <p>Los campos de los tickets entran directamente en <code>innerHTML</code> sin escape. Un título manipulado puede convertirse en HTML o JavaScript.</p>
+            </article>
+            <article class="risk-card" data-level="alto" data-search="768 tablet responsive overflow cola columnas">
+              <span class="level alto">Alto</span>
+              <h3>Overflow horizontal a 768 px</h3>
+              <p>La cola mantiene cinco columnas de mínimo 150 px: necesita 798 px antes de contar el padding del tablero.</p>
+            </article>
+            <article class="risk-card" data-level="medio" data-search="surge docs tests instrucciones publicar exposición archivos">
+              <span class="level medio">Medio</span>
+              <h3>Material interno accesible</h3>
+              <p>Publicar la raíz completa expondría documentación, tests, instrucciones, mockup y material de referencia que la app no necesita.</p>
+            </article>
+            <article class="risk-card" data-level="medio" data-search="dataset json tickets datos localstorage acceso público">
+              <span class="level medio">Medio</span>
+              <h3>Dataset y persistencia local públicos</h3>
+              <p>Los 60 tickets se descargan completos y las altas viven en <code>localStorage</code>, sin autenticación ni control de acceso.</p>
+            </article>
+            <article class="risk-card" data-level="medio" data-search="spec clasificación asignación decisiones descripción arquitectura">
+              <span class="level medio">Medio</span>
+              <h3>Diferencias con la especificación</h3>
+              <p>La demo no implementa IA, asignación, detección real de duplicados ni persistencia de decisiones como describe el spec.</p>
+            </article>
+            <article class="risk-card" data-level="medio" data-search="fetch cors ruta despliegue carga local surge">
+              <span class="level medio">Medio</span>
+              <h3>Local y Surge no son el mismo escenario</h3>
+              <p>La ruta relativa funciona por HTTP desde la raíz, pero abrir el archivo directamente puede fallar por módulos ES y <code>fetch</code>.</p>
+            </article>
+            <article class="risk-card" data-level="bajo" data-search="secretos claves password token authorization verisure marca">
+              <span class="level bajo">Bajo</span>
+              <h3>No hay secretos detectados</h3>
+              <p>La búsqueda literal no encontró claves, contraseñas, tokens ni autorización. Sí hay una marca de terceros que conviene autorizar.</p>
+            </article>
+          </div>
+          <p class="empty" id="empty-risks">No hay hallazgos que coincidan con ese filtro.</p>
+        </section>
+
+        <section class="section" id="arquitectura" aria-labelledby="architecture-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">01 · Código real</p><h2 id="architecture-title">Arquitectura y recorrido del dato</h2></div>
+            <p>La app es HTML, CSS y JavaScript plano. El HTML crea destinos vacíos; JavaScript carga, clasifica y pinta.</p>
+          </div>
+          <div class="panel">
+            <h3>Archivos que sí entran en la ejecución</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Archivo</th><th>Responsabilidad comprobada</th><th>Publicado</th></tr></thead>
+                <tbody>
+                  <tr><td><a href="../index.html">index.html</a></td><td>Estructura, enlaces a CSS y módulo JavaScript; referencia dos recursos de Verisure.</td><td>Sí</td></tr>
+                  <tr><td><a href="../css/styles.css">css/styles.css</a></td><td>Todos los estilos y breakpoints. Contiene bloques duplicados desde la línea 637.</td><td>Sí</td></tr>
+                  <tr><td><a href="../js/app.js">js/app.js</a></td><td>Carga, clasificación heurística, búsqueda, renderizado, diálogo y acciones.</td><td>Sí</td></tr>
+                  <tr><td><a href="../js/ticket-service.js">js/ticket-service.js</a></td><td>Crea identificador, fecha y estado inicial; no renderiza ni clasifica.</td><td>Sí</td></tr>
+                  <tr><td><a href="../data/tickets.json">data/tickets.json</a></td><td>Dataset inicial de 60 tickets con ocho campos.</td><td>Sí, si sigue siendo sintético</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>De la entrada a la pantalla</h3>
+            <div class="flow">
+              <div class="flow-step"><strong>HTML</strong><p>Define <code>summary</code>, <code>queue</code>, detalle y formulario.</p></div>
+              <div class="flow-step"><strong>Entrada</strong><p>El JSON y el formulario aportan los campos del ticket.</p></div>
+              <div class="flow-step"><strong>Servicio</strong><p><code>createTicket</code> añade ID, fecha y estado.</p></div>
+              <div class="flow-step"><strong>Enriquecido</strong><p><code>app.js</code> decide categoría y prioridad con <code>includes</code>.</p></div>
+              <div class="flow-step"><strong>Renderizado</strong><p>Las plantillas <code>innerHTML</code> escriben el DOM.</p></div>
+            </div>
+          </div>
+          <details open>
+            <summary>Fragmento HTML que conecta la pantalla</summary>
+            <div class="details-body">
+              <p><span class="proof checked">Comprobado</span> El archivo real solo define contenedores vacíos y el formulario; los tickets llegan después desde JavaScript.</p>
+              <pre><code>&lt;!-- app.js rellena estos destinos --&gt;
+&lt;section id="summary" class="summary"&gt;&lt;/section&gt;
+&lt;main class="board"&gt;
+  &lt;aside id="detail-panel" aria-live="polite"&gt;&lt;/aside&gt;
+  &lt;section id="queue" aria-live="polite"&gt;&lt;/section&gt;
+&lt;/main&gt;
+
+&lt;dialog id="new-ticket-dialog"&gt;
+  &lt;form id="new-ticket-form" method="dialog"&gt;
+    &lt;input name="titulo" type="text" required&gt;
+    &lt;textarea name="descripcion" required&gt;&lt;/textarea&gt;
+    &lt;input name="sistema_afectado" type="text" required&gt;
+    &lt;input name="reportado_por" type="text" required&gt;
+    &lt;input name="zona" type="text" required&gt;
+    &lt;button type="submit"&gt;Guardar ticket&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/dialog&gt;
+
+&lt;script type="module" src="js/app.js"&gt;&lt;/script&gt;</code></pre>
+            </div>
+          </details>
+          <details>
+            <summary>Fragmento crítico de renderizado</summary>
+            <div class="details-body">
+              <p><span class="proof checked">Comprobado</span> La entrada termina en almacenamiento local y después se inserta como HTML. <span class="proof interpreted">Interpretación</span> Por eso un título como <code>&lt;img src=x onerror=alert(1)&gt;</code> podría ejecutarse.</p>
+              <pre><code>// Entrada del formulario persistida en el origen.
+const ticket = createTicket(Object.fromEntries(formData.entries()));
+saveLocalTicket(ticket);
+
+// La plantilla inserta datos como HTML, no como texto.
+detailEl.innerHTML = `
+  &lt;div class="value"&gt;${selectedTicket.titulo}&lt;/div&gt;
+  &lt;div class="value"&gt;${selectedTicket.reportado_por}&lt;/div&gt;
+`;</code></pre>
+            </div>
+          </details>
+        </section>
+
+        <section class="section" id="seguridad" aria-labelledby="security-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">02 · Superficie pública</p><h2 id="security-title">Seguridad y exposición</h2></div>
+            <p>La amenaza principal en una app estática no es un backend atacable: es publicar datos, contexto o contenido ejecutable que no debía salir.</p>
+          </div>
+          <div class="panel">
+            <h3>Lo comprobado frente a lo interpretado</h3>
+            <p><span class="proof checked">Comprobado</span> No aparecen coincidencias literales de <code>password</code>, <code>secret</code>, claves API, tokens o <code>Authorization</code>. Esto no equivale a una auditoría criptográfica ni de historial Git.</p>
+            <p><span class="proof checked">Comprobado</span> El JSON contiene datos de demostración y el README declara que son inventados.</p>
+            <p><span class="proof interpreted">Interpretación</span> Si los datos fueran sustituidos por tickets reales, Surge no ofrecería privacidad: cualquier visitante podría descargar <code>data/tickets.json</code>.</p>
+          </div>
+          <div class="panel">
+            <h3>Corrección urgente del renderizado</h3>
+            <p>Usar nodos DOM y <code>textContent</code>, o un escape HTML centralizado, para todos los valores procedentes del ticket. <code>required</code> solo comprueba que hay contenido; no lo hace seguro.</p>
+            <pre><code>// Dirección recomendada: texto, no HTML interpretado.
+const title = document.createElement("div");
+title.className = "value";
+title.textContent = selectedTicket.titulo;
+detailEl.append(title);</code></pre>
+          </div>
+        </section>
+
+        <section class="section" id="responsive" aria-labelledby="responsive-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">03 · Tres tamaños</p><h2 id="responsive-title">Responsive</h2></div>
+            <p>La prueba visual con Chromium no pudo ejecutarse porque no está instalado. Lo siguiente está comprobado por las reglas CSS y por cálculo de sus dimensiones.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Viewport</th><th>Qué ocurre</th><th>Severidad</th></tr></thead>
+              <tbody>
+                <tr><td>375 px</td><td>Se activa el layout móvil, pero buscador y botón tienen ambos <code>width: 100%</code> dentro de una fila que también contiene iconos y perfil. Puede comprimirse la barra superior.</td><td><span class="level medio">Medio</span></td></tr>
+                <tr><td>768 px</td><td>No se activa el breakpoint de 760 px. La cola conserva cinco columnas de 150 px: <code>5*150 + 4*12 = 798 px</code>, antes de padding y bordes.</td><td><span class="level alto">Alto</span></td></tr>
+                <tr><td>1440 px</td><td>El contenedor limita a 1580 px y el tablero dispone de espacio suficiente para las cinco columnas mínimas.</td><td><span class="level bajo">Bajo</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout" style="margin-top: 14px"><p><strong>Nota de evidencia:</strong> no se afirma que el solapamiento de 375 px se haya visto en pantalla; se afirma que el CSS lo hace plausible. El overflow de 768 px sí se deduce directamente de los mínimos declarados.</p></div>
+        </section>
+
+        <section class="section" id="despliegue" aria-labelledby="deploy-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">04 · Paquete público</p><h2 id="deploy-title">Despliegue en Surge</h2></div>
+            <p>La ruta de datos está bien formada desde la raíz HTTP. Lo que se publique, sin embargo, será descargable por cualquier visitante.</p>
+          </div>
+          <div class="panel">
+            <h3>Paquete mínimo comprobado</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Necesario</th><th>Motivo</th></tr></thead>
+                <tbody>
+                  <tr><td><code>index.html</code></td><td>Punto de entrada y estructura.</td></tr>
+                  <tr><td><code>css/styles.css</code></td><td>Presentación.</td></tr>
+                  <tr><td><code>js/app.js</code> + <code>js/ticket-service.js</code></td><td>Lógica ejecutable.</td></tr>
+                  <tr><td><code>data/tickets.json</code></td><td>Dataset sintético inicial; es público.</td></tr>
+                  <tr><td><code>assets/verisure/verisure-official-icon.ico</code><br><code>assets/verisure/verisure-official-wordmark.png</code></td><td>Únicos recursos referenciados; requieren autorización de marca.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <details open>
+            <summary>Qué dejar fuera del despliegue</summary>
+            <div class="details-body">
+              <p><code>README.md</code>, <code>AGENTS.md</code>, <code>.github/</code>, <code>.agents/</code>, <code>.claude/</code>, <code>skills-lock.json</code>, <code>docs/</code>, <code>test/</code>, <code>mockup-mini-service-desk.html</code>, los README de <code>js/components/</code> y <code>js/utils/</code>, <code>assets/dribble/</code> y los SVG de Verisure no son necesarios para el flujo ejecutable.</p>
+              <p><span class="proof checked">Comprobado</span> Servir la raíz completa hace accesible <code>/docs/spec.md</code> con respuesta HTTP 200.</p>
+              <pre id="surgeignore"><code># Documentación interna y material de formación
+README.md
+AGENTS.md
+CLAUDE.md
+.github/
+.agents/
+.claude/
+skills-lock.json
+docs/
+
+# Tests y prototipos no usados por la app
+test/
+mockup-mini-service-desk.html
+js/components/
+js/utils/
+
+# Recursos no referenciados
+assets/dribble/
+assets/verisure/verisure-logo-1.svg
+assets/verisure/verisure-logo-2.svg</code></pre>
+              <div class="action-row"><button class="button primary" id="copy-ignore" type="button">Copiar .surgeignore</button><span id="copy-status" aria-live="polite"></span></div>
+            </div>
+          </details>
+          <details>
+            <summary>Otros problemas de despliegue</summary>
+            <div class="details-body">
+              <ul>
+                <li><strong>Carga:</strong> <code>response.ok</code> no se comprueba antes de <code>response.json()</code>; un 404, HTML o JSON inválido acaba en el mismo error genérico.</li>
+                <li><strong>Guardado:</strong> <code>localStorage.setItem</code> no está protegido contra cuota llena, modo privado o políticas del navegador.</li>
+                <li><strong>Rutas:</strong> las referencias son relativas y deberían funcionar en la raíz <code>servicedesk-grupo-N.surge.sh</code>; no hay router ni rutas internas.</li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <section class="section" id="acciones" aria-labelledby="actions-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">Plan de 30 minutos</p><h2 id="actions-title">Arreglos rápidos antes de publicar</h2></div>
+            <p>La lista está ordenada por impacto: primero impedir contenido ejecutable y desbordamientos; después reducir la superficie pública y alinear expectativas.</p>
+          </div>
+          <div class="panel">
+            <ol class="checklist">
+              <li>Eliminar la inyección HTML con <code>textContent</code> o escape centralizado y añadir un test con un título malicioso.</li>
+              <li>Corregir tablet y barra móvil; probar exactamente 375, 768 y 1440 px.</li>
+              <li>Crear <code>.surgeignore</code> o publicar un directorio mínimo.</li>
+              <li>Confirmar que el JSON sigue siendo sintético; nunca subir tickets reales a Surge.</li>
+              <li>Comprobar <code>response.ok</code>, capturar errores de <code>localStorage</code> y persistir decisiones si son requisito.</li>
+              <li>Describir la clasificación como heurística local mientras no exista integración de IA.</li>
+              <li>Confirmar permiso para usar la marca Verisure o sustituirla.</li>
+            </ol>
+          </div>
+          <div class="callout" style="margin-top: 14px"><p><strong>Conclusión:</strong> la app puede servirse como demo estática desde la raíz de Surge, pero no debería publicarse aún sin corregir el renderizado sin escape y el overflow de tablet. Esta página no crea <code>.surgeignore</code> ni ejecuta Surge.</p></div>
+        </section>
+
+        <footer>
+          Documento interactivo generado a partir de <a href="auditoria.md">docs/auditoria.md</a>. Las afirmaciones mantienen la etiqueta de comprobadas o interpretadas del informe original.
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const filters = document.querySelectorAll("[data-filter]");
+      const cards = [...document.querySelectorAll(".risk-card")];
+      const search = document.getElementById("risk-search");
+      const empty = document.getElementById("empty-risks");
+      let activeFilter = "todos";
+
+      function updateCards() {
+        const query = search.value.trim().toLowerCase();
+        let visible = 0;
+        cards.forEach((card) => {
+          const matchesFilter = activeFilter === "todos" || card.dataset.level === activeFilter;
+          const matchesSearch = !query || card.dataset.search.includes(query) || card.textContent.toLowerCase().includes(query);
+          const show = matchesFilter && matchesSearch;
+          card.classList.toggle("is-hidden", !show);
+          if (show) visible += 1;
+        });
+        empty.style.display = visible ? "none" : "block";
+      }
+
+      filters.forEach((filter) => {
+        filter.addEventListener("click", () => {
+          activeFilter = filter.dataset.filter;
+          filters.forEach((item) => item.setAttribute("aria-pressed", String(item === filter)));
+          updateCards();
+        });
+      });
+      search.addEventListener("input", updateCards);
+
+      document.getElementById("print-button").addEventListener("click", () => window.print());
+
+      document.getElementById("copy-ignore").addEventListener("click", async () => {
+        const content = document.querySelector("#surgeignore code").textContent;
+        const status = document.getElementById("copy-status");
+        try {
+          await navigator.clipboard.writeText(content);
+          status.textContent = "Copiado";
+        } catch (error) {
+          status.textContent = "No se pudo copiar; selecciona el bloque manualmente.";
+        }
+      });
+
+      const sections = [...document.querySelectorAll("main .section")];
+      const links = [...document.querySelectorAll(".nav a")];
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        links.forEach((link) => link.classList.toggle("active", link.getAttribute("href") === "#" + visible.target.id));
+      }, { rootMargin: "-15% 0px -70% 0px", threshold: [0, .2, .6] });
+      sections.forEach((section) => observer.observe(section));
+    }());
+  </script>
+</body>
+</html>

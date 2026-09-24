@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Service Desk — Mockup</title>
+    <style>
+      :root {
+        --bg: #f3f6fb;
+        --panel: #ffffff;
+        --panel-alt: #eef4ff;
+        --line: #dfe7f5;
+        --text: #1f2a37;
+        --muted: #5a6b82;
+        --primary: #1d4ed8;
+        --primary-soft: #dfe9ff;
+        --critical: #dc2626;
+        --critical-soft: #fee2e2;
+        --high: #f59e0b;
+        --high-soft: #fef3c7;
+        --medium: #10b981;
+        --medium-soft: #d1fae5;
+        --low: #6b7280;
+        --low-soft: #e5e7eb;
+        --warning: #7c3aed;
+        --warning-soft: #ede9fe;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .app {
+        max-width: 1440px;
+        margin: 24px auto;
+        padding: 0 18px 30px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 18px 22px;
+        margin-bottom: 18px;
+        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--primary), #60a5fa);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+      }
+
+      .brand h1 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+
+      .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .search {
+        background: var(--bg);
+        border: 1px solid var(--line);
+        padding: 10px 14px;
+        border-radius: 10px;
+        width: 260px;
+        color: var(--muted);
+      }
+
+      .pill {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 9px 12px;
+        background: #fff;
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(160px, 1fr));
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      .stat {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 16px 18px;
+      }
+
+      .stat-label {
+        color: var(--muted);
+        font-size: 0.8rem;
+        margin-bottom: 8px;
+      }
+
+      .stat-value {
+        font-size: 1.8rem;
+        font-weight: 700;
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+      }
+
+      .stat-value small {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      .board {
+        display: grid;
+        grid-template-columns: 1.7fr 1.1fr;
+        gap: 18px;
+      }
+
+      .board-main, .board-side {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px;
+      }
+
+      .priority-row {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(120px, 1fr));
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .priority-column {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #f9fbff;
+        overflow: hidden;
+      }
+
+      .priority-header {
+        padding: 12px 10px;
+        font-weight: 700;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .priority-header.critical { background: var(--critical-soft); color: var(--critical); }
+      .priority-header.high { background: var(--high-soft); color: #a16207; }
+      .priority-header.medium { background: var(--medium-soft); color: #047857; }
+      .priority-header.low { background: var(--low-soft); color: #374151; }
+      .priority-header.review { background: var(--warning-soft); color: var(--warning); }
+
+      .ticket-list {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .ticket-card {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        cursor: pointer;
+        transition: 0.15s ease;
+      }
+
+      .ticket-card:hover {
+        border-color: var(--primary);
+        box-shadow: 0 4px 12px rgba(29, 78, 216, 0.08);
+      }
+
+      .ticket-card.active {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.12);
+      }
+
+      .ticket-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .ticket-id {
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .badge {
+        font-size: 0.7rem;
+        border-radius: 999px;
+        padding: 4px 8px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .badge.critical { background: var(--critical-soft); color: var(--critical); }
+      .badge.high { background: var(--high-soft); color: #a16207; }
+      .badge.medium { background: var(--medium-soft); color: #047857; }
+      .badge.low { background: var(--low-soft); color: #374151; }
+      .badge.review { background: var(--warning-soft); color: var(--warning); }
+
+      .ticket-title {
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .ticket-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+
+      .detail-section {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .detail-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 12px;
+      }
+
+      .detail-head h2 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+
+      .mini-tag {
+        background: var(--primary-soft);
+        color: var(--primary);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .info-block, .ai-block, .history-block {
+        background: #f9fbff;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px;
+      }
+
+      .label {
+        color: var(--muted);
+        font-size: 0.76rem;
+        margin-bottom: 6px;
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .value {
+        font-weight: 700;
+      }
+
+      .action-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px 14px;
+        background: white;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .btn.primary {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: white;
+      }
+
+      .btn.warn {
+        background: var(--high-soft);
+        border-color: rgba(245, 158, 11, 0.4);
+        color: #8a5b00;
+      }
+
+      .btn.danger {
+        background: var(--critical-soft);
+        border-color: rgba(220, 38, 38, 0.25);
+        color: var(--critical);
+      }
+
+      .btn.success {
+        background: var(--medium-soft);
+        border-color: rgba(16, 185, 129, 0.25);
+        color: #047857;
+      }
+
+      .timeline {
+        margin: 0;
+        padding-left: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .timeline li {
+        color: var(--muted);
+      }
+
+      .aside-card {
+        margin-bottom: 14px;
+      }
+
+      .status-box {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px 12px;
+        background: #f8fafc;
+      }
+
+      .status-box strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+        gap: 10px;
+      }
+
+      @media (max-width: 1100px) {
+        .board {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .summary {
+          grid-template-columns: repeat(2, minmax(140px, 1fr));
+        }
+
+        .priority-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">S</div>
+          <h1>Mini Service Desk</h1>
+        </div>
+        <div class="top-actions">
+          <input class="search" value="Buscar ticket, área o categoría" aria-label="Buscar" />
+          <button class="pill">Filtros</button>
+        </div>
+      </header>
+
+      <section class="summary">
+        <div class="stat">
+          <div class="stat-label">Nuevos</div>
+          <div class="stat-value">12 <small>hoy</small></div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Urgentes</div>
+          <div class="stat-value">8 <small>alta prioridad</small></div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Sin clasificar</div>
+          <div class="stat-value">6</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Incompletos</div>
+          <div class="stat-value">4</div>
+        </div>
+      </section>
+
+      <main class="board">
+        <section class="board-main">
+          <div class="priority-row">
+            <div class="priority-column">
+              <div class="priority-header critical">Crítico</div>
+              <div class="ticket-list">
+                <div class="ticket-card active" data-id="T-104" data-category="Acceso" data-priority="Crítica">
+                  <div class="ticket-top">
+                    <span class="ticket-id">T-104</span>
+                    <span class="badge critical">Crítica</span>
+                  </div>
+                  <div class="ticket-title">Puerta 7 cerrada durante horario activo</div>
+                  <div class="ticket-meta">
+                    <span>Acceso</span>
+                    <span>Hace 12 min</span>
+                  </div>
+                </div>
+                <div class="ticket-card" data-id="T-109" data-category="Alarma" data-priority="Alta">
+                  <div class="ticket-top">
+                    <span class="ticket-id">T-109</span>
+                    <span class="badge high">Alta</span>
+                  </div>
+                  <div class="ticket-title">Alarma de movimiento en perímetro sur</div>
+                  <div class="ticket-meta">
+                    <span>Alarma</span>
+                    <span>Hace 18 min</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="priority-column">
+              <div class="priority-header high">Alto</div>
+              <div class="ticket-list">
+                <div class="ticket-card" data-id="T-112" data-category="Identidad" data-priority="Alta">
+                  <div class="ticket-top">
+                    <span class="ticket-id">T-112</span>
+                    <span class="badge high">Alta</span>
+                  </div>
+                  <div class="ticket-title">Credencial bloqueada para ingreso central</div>
+                  <div class="ticket-meta">
+                    <span>Identidad</span>
+                    <span>Hace 25 min</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="priority-column">
+              <div class="priority-header medium">Medio</div>
+              <div class="ticket-list">
+                <div class="ticket-card" data-id="T-118" data-category="Guardia" data-priority="Media">
+                  <div class="ticket-top">
+                    <span class="ticket-id">T-118</span>
+                    <span class="badge medium">Media</span>
+                  </div>
+                  <div class="ticket-title">Guardia no confirma cierre de ronda</div>
+                  <div class="ticket-meta">
+                    <span>Guardia</span>
+                    <span>Hace 32 min</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="priority-column">
+              <div class="priority-header low">Bajo</div>
+              <div class="ticket-list">
+                <div class="ticket-card" data-id="T-120" data-category="Acceso" data-priority="Baja">
+                  <div class="ticket-top">
+                    <span class="ticket-id">T-120</span>
+                    <span class="badge low">Baja</span>
+                  </div>
+                  <div class="ticket-title">Solicita cambio de horario de acceso</div>
+                  <div class="ticket-meta">
+                    <span>Acceso</span>
+                    <span>Hace 48 min</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="priority-column">
+              <div class="priority-header review">Revisión</div>
+              <div class="ticket-list">
+                <div class="ticket-card" data-id="T-130" data-category="Sin clasificar" data-priority="Pendiente">
+                  <div class="ticket-top">
+                    <span class="ticket-id">T-130</span>
+                    <span class="badge review">Pend.</span>
+                  </div>
+                  <div class="ticket-title">Evento con datos incompletos</div>
+                  <div class="ticket-meta">
+                    <span>Sin clas.</span>
+                    <span>Hace 1 h</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="board-side">
+          <div class="detail-section">
+            <div class="detail-head">
+              <h2>T-104</h2>
+              <span class="mini-tag">Acceso</span>
+            </div>
+
+            <div class="info-block">
+              <span class="label">Resumen</span>
+              <div class="value">Puerta 7 cerrada durante horario activo</div>
+            </div>
+
+            <div class="meta-grid">
+              <div class="info-block aside-card">
+                <span class="label">Origen</span>
+                <div class="value">Panel de accesos</div>
+              </div>
+              <div class="info-block aside-card">
+                <span class="label">Fecha</span>
+                <div class="value">22/09/2026</div>
+              </div>
+            </div>
+
+            <div class="status-box">
+              <strong>Estado</strong>
+              Nuevo / pendiente de revisión
+            </div>
+
+            <div class="ai-block">
+              <span class="label">Sugerencia de IA</span>
+              <div class="value">Categoría: Acceso</div>
+              <div class="value">Prioridad: Crítica</div>
+              <p style="margin: 10px 0 0; color: var(--muted); line-height: 1.5;">
+                La puerta estaba cerrada mientras el horario activo estaba habilitado y hay dos incidencias previas en la misma zona.
+              </p>
+            </div>
+
+            <div class="action-row">
+              <button class="btn primary">Confirmar</button>
+              <button class="btn warn">Corregir</button>
+              <button class="btn danger">Duplicado</button>
+              <button class="btn success">Incompleto</button>
+            </div>
+
+            <div class="history-block">
+              <span class="label">Historial</span>
+              <ul class="timeline">
+                <li>09:15 — IA sugirió acceso / crítica</li>
+                <li>09:20 — Operador revisó el caso</li>
+                <li>09:28 — Ticket en espera de validación</li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script>
+      const cards = document.querySelectorAll('.ticket-card');
+      const title = document.querySelector('.detail-head h2');
+      const tag = document.querySelector('.mini-tag');
+      const summary = document.querySelector('.info-block .value');
+      const statusBox = document.querySelector('.status-box');
+      const aiBlock = document.querySelector('.ai-block');
+      const aiText = aiBlock.querySelector('p');
+
+      const ticketData = {
+        'T-104': {
+          title: 'Puerta 7 cerrada durante horario activo',
+          category: 'Acceso',
+          priority: 'Crítica',
+          summary: 'Puerta 7 cerrada durante horario activo',
+          status: 'Nuevo / pendiente de revisión',
+          reason: 'La puerta estaba cerrada mientras el horario activo estaba habilitado y hay dos incidencias previas en la misma zona.'
+        },
+        'T-109': {
+          title: 'Alarma de movimiento en perímetro sur',
+          category: 'Alarma',
+          priority: 'Alta',
+          summary: 'Alarma de movimiento en perímetro sur',
+          status: 'Nuevo / revisión urgente',
+          reason: 'Se detectó movimiento en un perímetro restringido con patrón no habitual durante la noche.'
+        },
+        'T-112': {
+          title: 'Credencial bloqueada para ingreso central',
+          category: 'Identidad',
+          priority: 'Alta',
+          summary: 'Credencial bloqueada para ingreso central',
+          status: 'Nuevo / revisión de acceso',
+          reason: 'La identidad quedó bloqueada en un acceso con alta concurrencia y requiere validación del responsable.'
+        },
+        'T-118': {
+          title: 'Guardia no confirma cierre de ronda',
+          category: 'Guardia',
+          priority: 'Media',
+          summary: 'Guardia no confirma cierre de ronda',
+          status: 'Pendiente de confirmación',
+          reason: 'La ronda no fue cerrada dentro del horario previsto y requiere comprobación de la persona responsable.'
+        },
+        'T-120': {
+          title: 'Solicita cambio de horario de acceso',
+          category: 'Acceso',
+          priority: 'Baja',
+          summary: 'Solicita cambio de horario de acceso',
+          status: 'Pendiente de solicitud',
+          reason: 'Se solicita ajustar el horario y la alteración no afecta a seguridad crítica.'
+        },
+        'T-130': {
+          title: 'Evento con datos incompletos',
+          category: 'Sin clasificar',
+          priority: 'Pendiente',
+          summary: 'Evento con datos incompletos',
+          status: 'Revisión manual',
+          reason: 'Faltan datos esenciales sobre ubicación, hora y persona implicada para asignar categoría o prioridad.'
+        }
+      };
+
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          cards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+
+          const id = card.dataset.id;
+          const data = ticketData[id];
+          if (!data) return;
+
+          title.textContent = id;
+          tag.textContent = data.category;
+          summary.textContent = data.summary;
+          statusBox.innerHTML = '<strong>Estado</strong>' + data.status;
+          aiText.textContent = 'La puerta estaba cerrada mientras el horario activo estaba habilitado y hay dos incidencias previas en la misma zona.';
+
+          if (id === 'T-109') {
+            aiText.textContent = 'Se detectó movimiento en un perímetro restringido con patrón no habitual durante la noche.';
+          }
+          if (id === 'T-112') {
+            aiText.textContent = 'La identidad quedó bloqueada en un acceso con alta concurrencia y requiere validación del responsable.';
+          }
+          if (id === 'T-118') {
+            aiText.textContent = 'La ronda no fue cerrada dentro del horario previsto y requiere comprobación de la persona responsable.';
+          }
+          if (id === 'T-120') {
+            aiText.textContent = 'Se solicita ajustar el horario y la alteración no afecta a seguridad crítica.';
+          }
+          if (id === 'T-130') {
+            aiText.textContent = 'Faltan datos esenciales sobre ubicación, hora y persona implicada para asignar categoría o prioridad.';
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,602 @@
+[
+  {
+    "id": "SVD-4100",
+    "titulo": "Guardia nuevo sin perfil de acceso en Acceso peatonal Este",
+    "descripcion": "Un guardia nuevo no tiene todavía asignado el perfil de acceso en SailPoint para fichar en Acceso peatonal Este.",
+    "sistema_afectado": "SailPoint (identidades)",
+    "reportado_por": "Jefe de turno",
+    "zona": "Acceso peatonal Este",
+    "fecha": "2026-09-02",
+    "estado": "cerrado"
+  },
+  {
+    "id": "SVD-4101",
+    "titulo": "Cuadrante de Almacén Norte sin sincronizar",
+    "descripcion": "Falta sincronizar el turno de Almacén Norte con el nuevo cuadrante — aparecen dos guardias sin asignar.",
+    "sistema_afectado": "Centralita de guardia",
+    "reportado_por": "Jefe de turno",
+    "zona": "Almacén Norte",
+    "fecha": "2026-09-11",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4102",
+    "titulo": "Alarma perimetral desactivada tras mantenimiento en Perímetro exterior",
+    "descripcion": "La alarma perimetral de Perímetro exterior se ha desactivado sola tras el último mantenimiento.",
+    "sistema_afectado": "Central de alarmas",
+    "reportado_por": "Guardia de seguridad",
+    "zona": "Perímetro exterior",
+    "fecha": "2026-09-04",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4103",
+    "titulo": "Doble fichaje detectado en Oficinas centrales",
+    "descripcion": "Doble fichaje del mismo guardia en Oficinas centrales: aparece registrado en dos puestos a la misma hora.",
+    "sistema_afectado": "App de rondas",
+    "reportado_por": "Recepción cliente",
+    "zona": "Oficinas centrales",
+    "fecha": "2026-09-03",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4104",
+    "titulo": "Lector biométrico lento en Perímetro exterior",
+    "descripcion": "El guardia de Perímetro exterior reporta que el lector biométrico tarda más de 10 segundos en validar.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Administración",
+    "zona": "Perímetro exterior",
+    "fecha": "2026-09-03",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4105",
+    "titulo": "Checkpoint 10 no registrado en ronda de Perímetro exterior",
+    "descripcion": "La app de rondas no registra el checkpoint 10 de la ronda nocturna en Perímetro exterior.",
+    "sistema_afectado": "App de rondas",
+    "reportado_por": "Técnico de mantenimiento",
+    "zona": "Perímetro exterior",
+    "fecha": "2026-09-02",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4106",
+    "titulo": "Solicitud de histórico de accesos en Perímetro exterior",
+    "descripcion": "Un cliente de Perímetro exterior solicita el histórico de accesos del último mes para una auditoría.",
+    "sistema_afectado": "SailPoint (identidades)",
+    "reportado_por": "Jefe de turno",
+    "zona": "Perímetro exterior",
+    "fecha": "2026-09-08",
+    "estado": "cerrado"
+  },
+  {
+    "id": "SVD-4107",
+    "titulo": "Acceso temporal de proveedor a Sala de servidores",
+    "descripcion": "Petición de acceso temporal a Sala de servidores para un proveedor externo, caduca en 19 días.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Recepción cliente",
+    "zona": "Sala de servidores",
+    "fecha": "2026-09-06",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4108",
+    "titulo": "Puerta de emergencia abierta sin alarma en Edificio B, planta 3",
+    "descripcion": "La puerta de emergencia de Edificio B, planta 3 se ha quedado abierta y el sensor no ha lanzado alarma.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Guardia de seguridad",
+    "zona": "Edificio B, planta 3",
+    "fecha": "2026-09-10",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4109",
+    "titulo": "Alarma nocturna sin causa aparente en Oficinas centrales",
+    "descripcion": "La alarma de Oficinas centrales salta sola por la noche sin que haya movimiento registrado en cámaras.",
+    "sistema_afectado": "Central de alarmas",
+    "reportado_por": "Administración",
+    "zona": "Oficinas centrales",
+    "fecha": "2026-09-08",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4110",
+    "titulo": "Lector de tarjetas sin respuesta en Perímetro exterior",
+    "descripcion": "El lector de tarjetas de la puerta de Perímetro exterior no reconoce ninguna credencial desde esta mañana.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Coordinador de zona",
+    "zona": "Perímetro exterior",
+    "fecha": "2026-09-07",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4111",
+    "titulo": "Corte de grabación repetido en cámara 3",
+    "descripcion": "La grabación de la cámara 3 se corta cada noche sobre la misma hora en Sala de servidores.",
+    "sistema_afectado": "CCTV / videovigilancia",
+    "reportado_por": "Recepción cliente",
+    "zona": "Sala de servidores",
+    "fecha": "2026-09-01",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4112",
+    "titulo": "Interfono de Oficinas centrales no llega a centralita",
+    "descripcion": "La centralita de guardia no recibe las llamadas del interfono de Oficinas centrales desde el cambio de turno.",
+    "sistema_afectado": "Centralita de guardia",
+    "reportado_por": "Técnico de mantenimiento",
+    "zona": "Oficinas centrales",
+    "fecha": "2026-09-12",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4113",
+    "titulo": "Cámara 8 sin grabar en Perímetro exterior",
+    "descripcion": "La cámara 8 de Perímetro exterior lleva 19 días sin grabar, solo muestra pantalla en negro.",
+    "sistema_afectado": "CCTV / videovigilancia",
+    "reportado_por": "Recepción cliente",
+    "zona": "Perímetro exterior",
+    "fecha": "2026-09-02",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4114",
+    "titulo": "Tarjeta de baja sigue activa en Muelle de carga",
+    "descripcion": "Se ha dado de baja a un empleado hace 3 días y su tarjeta de acceso a Muelle de carga sigue activa.",
+    "sistema_afectado": "SailPoint (identidades)",
+    "reportado_por": "Guardia de seguridad",
+    "zona": "Muelle de carga",
+    "fecha": "2026-09-12",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4115",
+    "titulo": "Guardia nuevo sin perfil de acceso en Torre de control",
+    "descripcion": "Un guardia nuevo no tiene todavía asignado el perfil de acceso en SailPoint para fichar en Torre de control.",
+    "sistema_afectado": "SailPoint (identidades)",
+    "reportado_por": "Técnico de mantenimiento",
+    "zona": "Torre de control",
+    "fecha": "2026-09-12",
+    "estado": "cerrado"
+  },
+  {
+    "id": "SVD-4116",
+    "titulo": "Cuadrante de Torre de control sin sincronizar",
+    "descripcion": "Falta sincronizar el turno de Torre de control con el nuevo cuadrante — aparecen dos guardias sin asignar.",
+    "sistema_afectado": "Centralita de guardia",
+    "reportado_por": "Recepción cliente",
+    "zona": "Torre de control",
+    "fecha": "2026-09-06",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4117",
+    "titulo": "Alarma perimetral desactivada tras mantenimiento en Perímetro exterior",
+    "descripcion": "La alarma perimetral de Perímetro exterior se ha desactivado sola tras el último mantenimiento.",
+    "sistema_afectado": "Central de alarmas",
+    "reportado_por": "Guardia de seguridad",
+    "zona": "Perímetro exterior",
+    "fecha": "2026-09-04",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4118",
+    "titulo": "Doble fichaje detectado en Aparcamiento -1",
+    "descripcion": "Doble fichaje del mismo guardia en Aparcamiento -1: aparece registrado en dos puestos a la misma hora.",
+    "sistema_afectado": "App de rondas",
+    "reportado_por": "Recepción cliente",
+    "zona": "Aparcamiento -1",
+    "fecha": "2026-09-07",
+    "estado": "cerrado"
+  },
+  {
+    "id": "SVD-4119",
+    "titulo": "Lector biométrico lento en Recepción Principal",
+    "descripcion": "El guardia de Recepción Principal reporta que el lector biométrico tarda más de 10 segundos en validar.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Recepción cliente",
+    "zona": "Recepción Principal",
+    "fecha": "2026-09-09",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4120",
+    "titulo": "Checkpoint 7 no registrado en ronda de Aparcamiento -1",
+    "descripcion": "La app de rondas no registra el checkpoint 7 de la ronda nocturna en Aparcamiento -1.",
+    "sistema_afectado": "App de rondas",
+    "reportado_por": "Técnico de mantenimiento",
+    "zona": "Aparcamiento -1",
+    "fecha": "2026-09-12",
+    "estado": "cerrado"
+  },
+  {
+    "id": "SVD-4121",
+    "titulo": "Solicitud de histórico de accesos en Sala de servidores",
+    "descripcion": "Un cliente de Sala de servidores solicita el histórico de accesos del último mes para una auditoría.",
+    "sistema_afectado": "SailPoint (identidades)",
+    "reportado_por": "Jefe de turno",
+    "zona": "Sala de servidores",
+    "fecha": "2026-09-03",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4122",
+    "titulo": "Acceso temporal de proveedor a Aparcamiento -1",
+    "descripcion": "Petición de acceso temporal a Aparcamiento -1 para un proveedor externo, caduca en 8 días.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Administración",
+    "zona": "Aparcamiento -1",
+    "fecha": "2026-09-04",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4123",
+    "titulo": "Puerta de emergencia abierta sin alarma en Nave logística 2",
+    "descripcion": "La puerta de emergencia de Nave logística 2 se ha quedado abierta y el sensor no ha lanzado alarma.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Técnico de mantenimiento",
+    "zona": "Nave logística 2",
+    "fecha": "2026-09-05",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4124",
+    "titulo": "Alarma nocturna sin causa aparente en Aparcamiento -1",
+    "descripcion": "La alarma de Aparcamiento -1 salta sola por la noche sin que haya movimiento registrado en cámaras.",
+    "sistema_afectado": "Central de alarmas",
+    "reportado_por": "Técnico de mantenimiento",
+    "zona": "Aparcamiento -1",
+    "fecha": "2026-09-10",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4125",
+    "titulo": "Lector de tarjetas sin respuesta en Aparcamiento -1",
+    "descripcion": "El lector de tarjetas de la puerta de Aparcamiento -1 no reconoce ninguna credencial desde esta mañana.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Coordinador de zona",
+    "zona": "Aparcamiento -1",
+    "fecha": "2026-09-11",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4126",
+    "titulo": "Corte de grabación repetido en cámara 11",
+    "descripcion": "La grabación de la cámara 11 se corta cada noche sobre la misma hora en Nave logística 2.",
+    "sistema_afectado": "CCTV / videovigilancia",
+    "reportado_por": "Recepción cliente",
+    "zona": "Nave logística 2",
+    "fecha": "2026-09-07",
+    "estado": "cerrado"
+  },
+  {
+    "id": "SVD-4127",
+    "titulo": "Interfono de Acceso peatonal Este no llega a centralita",
+    "descripcion": "La centralita de guardia no recibe las llamadas del interfono de Acceso peatonal Este desde el cambio de turno.",
+    "sistema_afectado": "Centralita de guardia",
+    "reportado_por": "Administración",
+    "zona": "Acceso peatonal Este",
+    "fecha": "2026-09-07",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4128",
+    "titulo": "Cámara 2 sin grabar en Edificio B, planta 3",
+    "descripcion": "La cámara 2 de Edificio B, planta 3 lleva 7 días sin grabar, solo muestra pantalla en negro.",
+    "sistema_afectado": "CCTV / videovigilancia",
+    "reportado_por": "Recepción cliente",
+    "zona": "Edificio B, planta 3",
+    "fecha": "2026-09-03",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4129",
+    "titulo": "Tarjeta de baja sigue activa en Sala de servidores",
+    "descripcion": "Se ha dado de baja a un empleado hace 2 días y su tarjeta de acceso a Sala de servidores sigue activa.",
+    "sistema_afectado": "SailPoint (identidades)",
+    "reportado_por": "Guardia de seguridad",
+    "zona": "Sala de servidores",
+    "fecha": "2026-09-01",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4130",
+    "titulo": "Guardia nuevo sin perfil de acceso en Oficinas centrales",
+    "descripcion": "Un guardia nuevo no tiene todavía asignado el perfil de acceso en SailPoint para fichar en Oficinas centrales.",
+    "sistema_afectado": "SailPoint (identidades)",
+    "reportado_por": "Coordinador de zona",
+    "zona": "Oficinas centrales",
+    "fecha": "2026-09-01",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4131",
+    "titulo": "Cuadrante de Edificio B, planta 3 sin sincronizar",
+    "descripcion": "Falta sincronizar el turno de Edificio B, planta 3 con el nuevo cuadrante — aparecen dos guardias sin asignar.",
+    "sistema_afectado": "Centralita de guardia",
+    "reportado_por": "Jefe de turno",
+    "zona": "Edificio B, planta 3",
+    "fecha": "2026-09-11",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4132",
+    "titulo": "Alarma perimetral desactivada tras mantenimiento en Sala de servidores",
+    "descripcion": "La alarma perimetral de Sala de servidores se ha desactivado sola tras el último mantenimiento.",
+    "sistema_afectado": "Central de alarmas",
+    "reportado_por": "Recepción cliente",
+    "zona": "Sala de servidores",
+    "fecha": "2026-09-02",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4133",
+    "titulo": "Doble fichaje detectado en Nave logística 2",
+    "descripcion": "Doble fichaje del mismo guardia en Nave logística 2: aparece registrado en dos puestos a la misma hora.",
+    "sistema_afectado": "App de rondas",
+    "reportado_por": "Recepción cliente",
+    "zona": "Nave logística 2",
+    "fecha": "2026-09-05",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4134",
+    "titulo": "Lector biométrico lento en Aparcamiento -1",
+    "descripcion": "El guardia de Aparcamiento -1 reporta que el lector biométrico tarda más de 10 segundos en validar.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Administración",
+    "zona": "Aparcamiento -1",
+    "fecha": "2026-09-05",
+    "estado": "cerrado"
+  },
+  {
+    "id": "SVD-4135",
+    "titulo": "Checkpoint 3 no registrado en ronda de Vestuarios de personal",
+    "descripcion": "La app de rondas no registra el checkpoint 3 de la ronda nocturna en Vestuarios de personal.",
+    "sistema_afectado": "App de rondas",
+    "reportado_por": "Guardia de seguridad",
+    "zona": "Vestuarios de personal",
+    "fecha": "2026-09-04",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4136",
+    "titulo": "Solicitud de histórico de accesos en Aparcamiento -1",
+    "descripcion": "Un cliente de Aparcamiento -1 solicita el histórico de accesos del último mes para una auditoría.",
+    "sistema_afectado": "SailPoint (identidades)",
+    "reportado_por": "Guardia de seguridad",
+    "zona": "Aparcamiento -1",
+    "fecha": "2026-09-13",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4137",
+    "titulo": "Acceso temporal de proveedor a Torre de control",
+    "descripcion": "Petición de acceso temporal a Torre de control para un proveedor externo, caduca en 9 días.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Coordinador de zona",
+    "zona": "Torre de control",
+    "fecha": "2026-09-06",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4138",
+    "titulo": "Puerta de emergencia abierta sin alarma en Sala de servidores",
+    "descripcion": "La puerta de emergencia de Sala de servidores se ha quedado abierta y el sensor no ha lanzado alarma.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Coordinador de zona",
+    "zona": "Sala de servidores",
+    "fecha": "2026-09-13",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4139",
+    "titulo": "Alarma nocturna sin causa aparente en Torre de control",
+    "descripcion": "La alarma de Torre de control salta sola por la noche sin que haya movimiento registrado en cámaras.",
+    "sistema_afectado": "Central de alarmas",
+    "reportado_por": "Jefe de turno",
+    "zona": "Torre de control",
+    "fecha": "2026-09-13",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4140",
+    "titulo": "Lector de tarjetas sin respuesta en Acceso peatonal Este",
+    "descripcion": "El lector de tarjetas de la puerta de Acceso peatonal Este no reconoce ninguna credencial desde esta mañana.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Jefe de turno",
+    "zona": "Acceso peatonal Este",
+    "fecha": "2026-09-09",
+    "estado": "cerrado"
+  },
+  {
+    "id": "SVD-4141",
+    "titulo": "Corte de grabación repetido en cámara 12",
+    "descripcion": "La grabación de la cámara 12 se corta cada noche sobre la misma hora en Sala de servidores.",
+    "sistema_afectado": "CCTV / videovigilancia",
+    "reportado_por": "Guardia de seguridad",
+    "zona": "Sala de servidores",
+    "fecha": "2026-09-13",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4142",
+    "titulo": "Interfono de Nave logística 2 no llega a centralita",
+    "descripcion": "La centralita de guardia no recibe las llamadas del interfono de Nave logística 2 desde el cambio de turno.",
+    "sistema_afectado": "Centralita de guardia",
+    "reportado_por": "Administración",
+    "zona": "Nave logística 2",
+    "fecha": "2026-09-10",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4143",
+    "titulo": "Cámara 12 sin grabar en Nave logística 2",
+    "descripcion": "La cámara 12 de Nave logística 2 lleva 12 días sin grabar, solo muestra pantalla en negro.",
+    "sistema_afectado": "CCTV / videovigilancia",
+    "reportado_por": "Técnico de mantenimiento",
+    "zona": "Nave logística 2",
+    "fecha": "2026-09-02",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4144",
+    "titulo": "Tarjeta de baja sigue activa en Recepción Principal",
+    "descripcion": "Se ha dado de baja a un empleado hace 16 días y su tarjeta de acceso a Recepción Principal sigue activa.",
+    "sistema_afectado": "SailPoint (identidades)",
+    "reportado_por": "Jefe de turno",
+    "zona": "Recepción Principal",
+    "fecha": "2026-09-06",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4145",
+    "titulo": "Guardia nuevo sin perfil de acceso en Nave logística 2",
+    "descripcion": "Un guardia nuevo no tiene todavía asignado el perfil de acceso en SailPoint para fichar en Nave logística 2.",
+    "sistema_afectado": "SailPoint (identidades)",
+    "reportado_por": "Guardia de seguridad",
+    "zona": "Nave logística 2",
+    "fecha": "2026-09-08",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4146",
+    "titulo": "Cuadrante de Torre de control sin sincronizar",
+    "descripcion": "Falta sincronizar el turno de Torre de control con el nuevo cuadrante — aparecen dos guardias sin asignar.",
+    "sistema_afectado": "Centralita de guardia",
+    "reportado_por": "Recepción cliente",
+    "zona": "Torre de control",
+    "fecha": "2026-09-13",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4147",
+    "titulo": "Alarma perimetral desactivada tras mantenimiento en Nave logística 2",
+    "descripcion": "La alarma perimetral de Nave logística 2 se ha desactivado sola tras el último mantenimiento.",
+    "sistema_afectado": "Central de alarmas",
+    "reportado_por": "Administración",
+    "zona": "Nave logística 2",
+    "fecha": "2026-09-06",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4148",
+    "titulo": "Doble fichaje detectado en Vestuarios de personal",
+    "descripcion": "Doble fichaje del mismo guardia en Vestuarios de personal: aparece registrado en dos puestos a la misma hora.",
+    "sistema_afectado": "App de rondas",
+    "reportado_por": "Recepción cliente",
+    "zona": "Vestuarios de personal",
+    "fecha": "2026-09-12",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4149",
+    "titulo": "Lector biométrico lento en Vestuarios de personal",
+    "descripcion": "El guardia de Vestuarios de personal reporta que el lector biométrico tarda más de 10 segundos en validar.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Jefe de turno",
+    "zona": "Vestuarios de personal",
+    "fecha": "2026-09-01",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4150",
+    "titulo": "Checkpoint 8 no registrado en ronda de Perímetro exterior",
+    "descripcion": "La app de rondas no registra el checkpoint 8 de la ronda nocturna en Perímetro exterior.",
+    "sistema_afectado": "App de rondas",
+    "reportado_por": "Coordinador de zona",
+    "zona": "Perímetro exterior",
+    "fecha": "2026-09-14",
+    "estado": "cerrado"
+  },
+  {
+    "id": "SVD-4151",
+    "titulo": "Solicitud de histórico de accesos en Torre de control",
+    "descripcion": "Un cliente de Torre de control solicita el histórico de accesos del último mes para una auditoría.",
+    "sistema_afectado": "SailPoint (identidades)",
+    "reportado_por": "Coordinador de zona",
+    "zona": "Torre de control",
+    "fecha": "2026-09-09",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4152",
+    "titulo": "Acceso temporal de proveedor a Almacén Norte",
+    "descripcion": "Petición de acceso temporal a Almacén Norte para un proveedor externo, caduca en 4 días.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Coordinador de zona",
+    "zona": "Almacén Norte",
+    "fecha": "2026-09-12",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4153",
+    "titulo": "Puerta de emergencia abierta sin alarma en Acceso peatonal Este",
+    "descripcion": "La puerta de emergencia de Acceso peatonal Este se ha quedado abierta y el sensor no ha lanzado alarma.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Guardia de seguridad",
+    "zona": "Acceso peatonal Este",
+    "fecha": "2026-09-05",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4154",
+    "titulo": "Alarma nocturna sin causa aparente en Muelle de carga",
+    "descripcion": "La alarma de Muelle de carga salta sola por la noche sin que haya movimiento registrado en cámaras.",
+    "sistema_afectado": "Central de alarmas",
+    "reportado_por": "Coordinador de zona",
+    "zona": "Muelle de carga",
+    "fecha": "2026-09-06",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4155",
+    "titulo": "Lector de tarjetas sin respuesta en Oficinas centrales",
+    "descripcion": "El lector de tarjetas de la puerta de Oficinas centrales no reconoce ninguna credencial desde esta mañana.",
+    "sistema_afectado": "Control de accesos",
+    "reportado_por": "Guardia de seguridad",
+    "zona": "Oficinas centrales",
+    "fecha": "2026-09-12",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4156",
+    "titulo": "Corte de grabación repetido en cámara 11",
+    "descripcion": "La grabación de la cámara 11 se corta cada noche sobre la misma hora en Nave logística 2.",
+    "sistema_afectado": "CCTV / videovigilancia",
+    "reportado_por": "Coordinador de zona",
+    "zona": "Nave logística 2",
+    "fecha": "2026-09-07",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4157",
+    "titulo": "Interfono de Oficinas centrales no llega a centralita",
+    "descripcion": "La centralita de guardia no recibe las llamadas del interfono de Oficinas centrales desde el cambio de turno.",
+    "sistema_afectado": "Centralita de guardia",
+    "reportado_por": "Coordinador de zona",
+    "zona": "Oficinas centrales",
+    "fecha": "2026-09-01",
+    "estado": "cerrado"
+  },
+  {
+    "id": "SVD-4158",
+    "titulo": "Cámara 10 sin grabar en Aparcamiento -1",
+    "descripcion": "La cámara 10 de Aparcamiento -1 lleva 1 día sin grabar, solo muestra pantalla en negro.",
+    "sistema_afectado": "CCTV / videovigilancia",
+    "reportado_por": "Jefe de turno",
+    "zona": "Aparcamiento -1",
+    "fecha": "2026-09-03",
+    "estado": "abierto"
+  },
+  {
+    "id": "SVD-4159",
+    "titulo": "Tarjeta de baja sigue activa en Nave logística 2",
+    "descripcion": "Se ha dado de baja a un empleado hace 4 días y su tarjeta de acceso a Nave logística 2 sigue activa.",
+    "sistema_afectado": "SailPoint (identidades)",
+    "reportado_por": "Coordinador de zona",
+    "zona": "Nave logística 2",
+    "fecha": "2026-09-01",
+    "estado": "abierto"
+  }
+]

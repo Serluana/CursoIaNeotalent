@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mini Service Desk</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <div class="app-shell">
+        <aside class="sidebar" aria-label="Navegación">
+          <div class="sidebar-brand">HEXIS</div>
+          <nav class="nav" aria-label="Menú principal">
+            <button class="nav-item active" type="button"><span class="nav-icon">⌂</span> Inicio</button>
+            <button class="nav-item" type="button"><span class="nav-icon">▤</span> Sectores y empleados</button>
+            <button class="nav-item" type="button"><span class="nav-icon">▣</span> Generar informes</button>
+            <button class="nav-item" type="button"><span class="nav-icon">▨</span> Gestionar alertas</button>
+            <button class="nav-item" type="button"><span class="nav-icon">◌</span> En peligro</button>
+            <button class="nav-item" type="button"><span class="nav-icon">✉</span> Contacto</button>
+            <button class="nav-item" type="button"><span class="nav-icon">? </span> Preguntas frecuentes</button>
+            <button class="nav-item" type="button"><span class="nav-icon">⚙</span> Configuración</button>
+          </nav>
+        </aside>
+
+        <div class="main-panel">
+          <header class="topbar">
+            <div class="brand">
+              <div class="brand-logos" aria-label="Identidad de Verisure">
+                <img class="brand-icon" src="assets/verisure/verisure-official-icon.ico" alt="Verisure icono" />
+                <img class="brand-logo" src="assets/verisure/verisure-official-wordmark.png" alt="Verisure logo" />
+              </div>
+            </div>
+            <div class="top-actions">
+              <input id="search-input" class="search" type="text" placeholder="Buscar empleados, datos y configuración" aria-label="Buscar ticket" />
+              <button id="new-ticket-button" class="new-ticket-button" type="button">Nuevo ticket</button>
+              <button class="pill" type="button" aria-label="Notificaciones">◌</button>
+              <button class="pill" type="button" aria-label="Mensajes">◔</button>
+              <div class="profile-pill" aria-label="Perfil del usuario">JD</div>
+            </div>
+          </header>
+
+          <section id="summary" class="summary"></section>
+
+          <main class="board">
+            <aside id="detail-panel" class="detail-panel" aria-live="polite"></aside>
+            <section id="queue" class="queue" aria-live="polite"></section>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <dialog id="new-ticket-dialog" class="new-ticket-dialog">
+      <form id="new-ticket-form" method="dialog">
+        <div class="dialog-header">
+          <div>
+            <span class="dialog-kicker">Registro de incidencia</span>
+            <h2>Nuevo ticket</h2>
+          </div>
+          <button id="close-ticket-dialog" class="dialog-close" type="button" aria-label="Cerrar">×</button>
+        </div>
+        <label for="ticket-title">Título</label>
+        <input id="ticket-title" name="titulo" type="text" required />
+        <label for="ticket-description">Descripción</label>
+        <textarea id="ticket-description" name="descripcion" rows="3" required></textarea>
+        <label for="ticket-system">Sistema afectado</label>
+        <input id="ticket-system" name="sistema_afectado" type="text" required />
+        <div class="dialog-grid">
+          <div>
+            <label for="ticket-reporter">Reportado por</label>
+            <input id="ticket-reporter" name="reportado_por" type="text" required />
+          </div>
+          <div>
+            <label for="ticket-zone">Zona</label>
+            <input id="ticket-zone" name="zona" type="text" required />
+          </div>
+        </div>
+        <div class="dialog-actions">
+          <button id="cancel-ticket-button" class="btn" type="button">Cancelar</button>
+          <button class="btn primary" type="submit">Guardar ticket</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
