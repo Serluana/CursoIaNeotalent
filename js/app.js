@@ -1,4 +1,6 @@
 import { createTicket } from "./ticket-service.js";
+import { classifyTicket } from "./classify.js";
+import { prioritizeTicket } from "./prioritize.js";
 
 const priorityOrder = ["Crítica", "Alta", "Media", "Baja", "Pendiente"];
 const priorityColumnMap = {
@@ -40,42 +42,6 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
-function getSuggestedCategory(ticket) {
-  const text = normalizeText(`${ticket.titulo} ${ticket.descripcion} ${ticket.sistema_afectado} ${ticket.zona}`);
-
-  if (text.includes("alarma") || text.includes("cámara") || text.includes("perimetral") || text.includes("movimiento")) {
-    return "Alarmas";
-  }
-
-  if (text.includes("guardia") || text.includes("ronda") || text.includes("cuadrante") || text.includes("fichar") || text.includes("turno")) {
-    return "Guardias";
-  }
-
-  if (text.includes("credencial") || text.includes("identidad") || text.includes("perfil") || text.includes("sailpoint") || text.includes("historico de accesos")) {
-    return "Identidades";
-  }
-
-  return "Accesos";
-}
-
-function getSuggestedPriority(ticket) {
-  const text = normalizeText(`${ticket.titulo} ${ticket.descripcion}`);
-
-  if (text.includes("alarma") || text.includes("cerrada") || text.includes("sin respuesta") || text.includes("puerta de emergencia") || text.includes("sin alarma")) {
-    return "Crítica";
-  }
-
-  if (text.includes("bloqueada") || text.includes("duplicado") || text.includes("sin sincronizar") || text.includes("sin registrar") || text.includes("sin causa aparente")) {
-    return "Alta";
-  }
-
-  if (text.includes("lento") || text.includes("histórico") || text.includes("cambio de horario") || text.includes("acceso temporal")) {
-    return "Media";
-  }
-
-  return "Baja";
-}
-
 function computePriorityRank(priority) {
   return priorityOrder.indexOf(priority);
 }
@@ -92,8 +58,8 @@ function getPriorityBadge(priority) {
 }
 
 function enrichTicket(ticket) {
-  const category = getSuggestedCategory(ticket);
-  const priority = getSuggestedPriority(ticket);
+  const category = classifyTicket(ticket);
+  const priority = prioritizeTicket(ticket);
 
   return {
     ...ticket,

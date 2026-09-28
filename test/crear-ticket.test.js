@@ -1,6 +1,22 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createTicket } from "../js/ticket-service.js";
+import { classifyTicket } from "../js/classify.js";
+import { prioritizeTicket } from "../js/prioritize.js";
+
+test("clasifica tickets según las palabras clave del dominio", () => {
+  assert.equal(classifyTicket({ titulo: "Alarma perimetral" }), "Alarmas");
+  assert.equal(classifyTicket({ titulo: "Ronda de guardia" }), "Guardias");
+  assert.equal(classifyTicket({ sistema_afectado: "SailPoint" }), "Identidades");
+  assert.equal(classifyTicket({ titulo: "Lector de tarjetas" }), "Accesos");
+});
+
+test("prioriza tickets según las señales de riesgo y afectación", () => {
+  assert.equal(prioritizeTicket({ titulo: "Puerta de emergencia abierta sin alarma" }), "Crítica");
+  assert.equal(prioritizeTicket({ titulo: "Cuadrante sin sincronizar" }), "Alta");
+  assert.equal(prioritizeTicket({ titulo: "Lector biométrico lento" }), "Media");
+  assert.equal(prioritizeTicket({ titulo: "Solicitud de tarjeta" }), "Baja");
+});
 
 test("crea un ticket nuevo con estado y trazabilidad inicial", () => {
   const ticket = createTicket({
