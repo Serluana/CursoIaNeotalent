@@ -8,7 +8,8 @@ test("clasifica tickets según las palabras clave del dominio", () => {
   assert.equal(classifyTicket({ titulo: "Alarma perimetral" }), "Alarmas");
   assert.equal(classifyTicket({ titulo: "Ronda de guardia" }), "Guardias");
   assert.equal(classifyTicket({ sistema_afectado: "SailPoint" }), "Identidades");
-  assert.equal(classifyTicket({ titulo: "Lector de tarjetas" }), "Accesos");
+  assert.equal(classifyTicket({ titulo: "Lector de tarjetas", sistema_afectado: "Control de accesos" }), "Accesos");
+  assert.equal(classifyTicket({ titulo: "Incidencia sin detalle" }), "Sin clasificar");
 });
 
 test("prioriza tickets según las señales de riesgo y afectación", () => {
