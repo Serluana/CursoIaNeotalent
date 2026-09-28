@@ -14,7 +14,7 @@ export function classifyTicket(ticket) {
     return "Identidades";
   }
 
-  if (system.includes("control de accesos") && (text.includes("lector biométrico") || text.includes("lector de tarjetas"))) {
+  if (system.includes("control de accesos") && (text.includes("lector biométrico") || text.includes("lector de tarjetas") || text.includes("acceso temporal"))) {
     return "Accesos";
   }
 
